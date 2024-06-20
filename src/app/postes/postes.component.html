@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form #postses="ngForm" (ngSubmit)="Oncreatpost(postses.value)">
+        <div class="form-group">
+          <label for="exampleInputEmail1">title</label>
+          <input
+            name="titel"
+            ngModel
+            required
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">content</label>
+          <input
+            name="content"
+            ngModel
+            required
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br />
+      <hr />
+      <div class="row">
+        <p class="text-danger" *ngIf="posts.length < 1 && !erors">no valiue is hared</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of posts">
+            <h1>{{ item.titel }}</h1>
+            <p class="text-danger">{{ item.titel }}</p>
+          </li>
+        </ul>
+        <div class="alert alert-danger" *ngIf="erors">
+            <h1>erorrs</h1>
+            {{erors | json}}
+        </div>
+        <br>
+        <button class="btn btn-primary" (click)="OnGetposts()">
+          load data
+        </button>
+      
+        <button class="btn btn-danger mt-3" (click)="OnclearData()">
+            cleardata data
+          </button>
+      </div>
+    </div>
+  </div>
+</div>

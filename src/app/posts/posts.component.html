@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form #postForm="ngForm" (ngSubmit)="Oncreatpost(postForm.value)">
+        <div class="form-groub">
+          <label for="titel">title</label>
+          <input
+            type="text"
+            ngModel
+            name="titel"
+            id="titel"
+            required
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-groub">
+          <label for="content">content</label>
+          <input
+            type="text"
+            ngModel
+            name="content"
+            id="content"
+            required
+            class="form-control"
+          />
+        </div>
+        <button class="btn btn-primary" [disabled]="postForm.invalid">
+          creat post
+        </button>
+      </form>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+            <button class=" btn btn-success float-end" (click)="Onfetshpost()">
+            Get all posts</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-danger float-end" (click)="OnClearpost()">
+            clear posts</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-danger" *ngIf="Loadposts.length<1 && !Isloading &&!errors"> No Posts avalible</p>
+           <ul class="list-group" *ngIf="Loadposts.length>=1 && !Isloading">
+            <li class="list-group-item" *ngFor="let item of Loadposts">
+              <h1 class="text-danger">{{item.content}}</h1>
+              <p>{{item.titel}}</p>
+          </li>
+          </ul>
+          <p *ngIf="Isloading && !errors" >loading.........</p>
+          <div class="alert alert-danger float-end"*ngIf="errors">
+               <h1>Lorem ipsum dolor sit.........</h1>
+               <p class="text-primary">{{errors}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

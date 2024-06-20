@@ -1,0 +1,31 @@
+<div class="container">
+  <br />
+<br />
+<div class="col-md-12 col-xs-12 col-sm-12">
+  <br>
+  <div class="row">
+    <div class="md-3"></div>
+    <div class="md-6">
+     serash <input  type="text" class="form-control" [(ngModel)]="filtersstatus">
+    </div>
+    <div class="md-3">
+      <button class="btn-primary" (click)="onaddserver()">addserver</button>
+    </div>
+  </div>
+  <br>
+  <ul class="list-groub">
+    <li
+      style="padding: 10px"
+      class="list-groub-item"
+      *ngFor="let item of serve | filter:filtersstatus:'stabel'"
+      [ngClass]="getclass(item)"
+    >
+      <span class="badge bg-primary float-end">{{ item.status }}</span>
+      <strong>{{ item.namess | lowercase | shorten:5  }}</strong>
+      {{ item.Badget | currency : "GBP" }} | {{ item.inctyncetype }}
+      {{ item.started | date : "fullDate" }}
+      | S {{ item.serverloadingtime | number : "1.1-2" }}
+    </li>
+  </ul>
+</div>
+</div>

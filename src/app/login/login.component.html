@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row" style="margin: 100px">
+    <form [formGroup]="regstform">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          formControlName="username"
+          name="Email"
+          aria-describedby="emailHelp"
+
+          [class.is-invalid]="
+            getlogin('username')?.invalid && getlogin('username')?.touched
+          "
+        />
+        <div *ngIf="getlogin('username')?.invalid && getlogin('username')?.touched">
+          <small
+            class="text-danger float-end"
+            *ngIf="getlogin('username')?.errors?.['required'] "
+            >this is required</small>
+          <small
+            class="text-danger float-end"
+            *ngIf="getlogin('username')?.errors?.['minLength']"
+            >this is number max mim 5</small>
+
+            <small
+            class="text-danger float-end"
+            *ngIf="getlogin('username')?.errors?.['valditer']"
+            >no this is {{getlogin('username')?.errors?.['valditer'].value}}</small>
+        </div>
+        
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          ngModel
+          name="password"
+          formControlName="password"
+          [class.is-invalid]="getlogin('password')?.invalid&& getlogin('password')?.touched"
+        />
+
+            <br>
+
+        <div>
+          <label >condirm password</label>
+          <input type="text"
+          [class.is-invalid]="regstform.errors?.['abstrac']"
+          name="password"formControlName="condirmpassword" class="form-control">
+        </div>
+        <small class="text-danger" *ngIf="regstform.errors?.['abstrac']"></small>
+        <!-- ///////////////////////////////////////// -->
+        <div *ngIf="getlogin('password')?.invalid&& getlogin('password')?.touched">
+          <small class="text-danger float-end" *ngIf="getlogin('password')?.errors?.['required']">this is required</small>
+          <small class="text-danger float-end" *ngIf="getlogin('password')?.errors?.['valditer']">this is no{{getlogin('password')?.errors?.['valditer'].value}}</small>
+        </div>
+
+      </div>
+      <div class="mb-3 form-check">
+        <input (click)="requiredpasward()"
+        formControlName="subscirpe"
+        type="checkbox" class="form-check-input" id="exampleCheck1" />
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+  <!-- /creat emails  -->
+
+      <div formArrayName="createmails" *ngFor="let item of createmails.controls;let i=index">
+        <label >creat emails {{i+1}}</label>
+        <input type="text" class="form-control">
+        <button class="btn-danger" (click)="deletemais(i)">delet</button>
+      </div>
+<button class="btn-primary" (click)="Onaddemils()">creat emails</button>
+<br>
+      <button class="btn-danger">Add values</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary" (click)="pushdata()">push data</button>
+    </form>
+  </div>
+</div>
